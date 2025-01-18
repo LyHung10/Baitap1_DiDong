@@ -12,7 +12,7 @@
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_marginTop="180dp"
-        android:src="@drawable/anh_dai_dien"
+        android:src="@drawable/anhdaidien"
         app:civ_border_color="#FF5722"
         app:civ_border_width="2dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,20 +20,53 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/textViewInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nguyễn Lý Hùng - 22110337"
+        android:textSize="18sp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/circleImageView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+
+    <!-- Ô nhập chuỗi -->
+
+    <!-- Nút xử lý -->
     <EditText
-        android:id="@+id/editTextText2"
+        android:id="@+id/editTextInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
-        android:ems="10"
-        android:inputType="text"
+        android:layout_marginTop="392dp"
+        android:hint="Nhập chuỗi"
         android:padding="10dp"
-        android:text="Nguyễn Lý Hùng - 22110337"
-        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/circleImageView" />
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/buttonProcess"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Xử lý"
+        app:layout_constraintTop_toBottomOf="@id/editTextInput"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
 
+    <!-- TextView hiển thị kết quả -->
+    <TextView
+        android:id="@+id/textViewOutput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Kết quả"
+        android:textSize="16sp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/buttonProcess"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

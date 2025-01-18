@@ -29,30 +29,41 @@ import java.util.List;
 import java.util.Arrays;
 public class MainActivity extends AppCompatActivity {
 
+    private EditText editTextInput;
+    private Button buttonProcess;
+    private TextView textViewOutput;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
+
+        // Ẩn thanh trạng thái và thanh điều hướng
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         this.getWindow().getDecorView().setSystemUiVisibility(
-                android.view.View.SYSTEM_UI_FLAG_FULLSCREEN
-                        | android.view.View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                        | android.view.View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
-        setContentView(R.layout.activity_main);
+                View.SYSTEM_UI_FLAG_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
 
+        setContentView(R.layout.activity_main);
 
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        // Khởi tạo các view
+        editTextInput = findViewById(R.id.editTextInput);
+        buttonProcess = findViewById(R.id.buttonProcess);
+        textViewOutput = findViewById(R.id.textViewOutput);
+
+        // Xử lý mảng ngẫu nhiên
         randomAndProcessArray();
 
-
+        // Thiết lập chức năng đảo ngược chuỗi
+        setupReverseTextFeature();
     }
     private void randomAndProcessArray() {
         // Tạo mảng ArrayList kiểu số nguyên
@@ -83,13 +94,30 @@ public class MainActivity extends AppCompatActivity {
         Log.d("ArrayList", "Số chẵn: " + evenNumbers.toString());
         Log.d("ArrayList", "Số lẻ: " + oddNumbers.toString());
     }
-    private String reverseWords(String input) {
-        // Chia chuỗi thành các từ
-        List<String> words = Arrays.asList(input.split(" "));
-        // Đảo ngược danh sách từ
+    private void setupReverseTextFeature() {
+        buttonProcess.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String input = editTextInput.getText().toString();
+                if (!input.isEmpty()) {
+                    String reversed = reverseAndCapitalize(input);
+                    textViewOutput.setText(reversed);
+                    Toast.makeText(MainActivity.this, reversed, Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(MainActivity.this, "Vui lòng nhập chuỗi", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    private String reverseAndCapitalize(String input) {
+        List<String> words = Arrays.asList(input.split("\\s+"));
         Collections.reverse(words);
-        // Nối lại thành chuỗi
-        return String.join(" ", words);
+        StringBuilder reversed = new StringBuilder();
+        for (String word : words) {
+            reversed.append(word.toUpperCase()).append(" ");
+        }
+        return reversed.toString().trim();
     }
 
 }
